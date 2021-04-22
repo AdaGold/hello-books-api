@@ -33,6 +33,8 @@ def handle_book(book_id):
     book = Book.query.get(book_id)
 
     if request.method == "GET":
+        if book is None:
+            return make_response("", 404)
         return {
             "id": book.id,
             "title": book.title,
