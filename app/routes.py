@@ -31,10 +31,10 @@ def handle_books():
 @books_bp.route("/<book_id>", methods=["GET", "PUT", "DELETE"])
 def handle_book(book_id):
     book = Book.query.get(book_id)
+    if book is None:
+        return make_response("", 404)
 
     if request.method == "GET":
-        if book is None:
-            return make_response("", 404)
         return {
             "id": book.id,
             "title": book.title,
