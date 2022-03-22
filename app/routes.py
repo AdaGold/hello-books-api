@@ -28,7 +28,7 @@ def handle_books():
             }
         )
     return jsonify(books_response)
-    
+
 @books_bp.route("/<book_id>", methods=["GET"])
 def handle_book(book_id):
     book_id = int(book_id)
@@ -39,6 +39,8 @@ def handle_book(book_id):
                 "title": book.title,
                 "description": book.description,
             }
+    
+    return {"message": f"book {book_id} not found"}, 404
 
 @hello_world_bp.route("/hello-world", methods=["GET"])
 def say_hello_world():
