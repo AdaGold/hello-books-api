@@ -1,5 +1,6 @@
 
-from flask import Blueprint, jsonify
+from os import abort
+from flask import Blueprint, jsonify, abort, make_response
 
 class Book:
     def __init__(self, id, title, description):
@@ -16,6 +17,21 @@ books = [
 hello_world_bp = Blueprint("hello_world_bp", __name__)
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
+def validate_book(book_id):
+    try:
+        book_id = int(book_id)
+    except:
+        abort(make_response({"message":f"book {book_id} invalid"}, 400))
+
+    found = False
+    for book in books:
+        if book.id == book_id:
+            found = True
+
+    if found is False:
+        abort(make_response({"message":f"book {book_id} not found"}, 404))
+        
+
 @books_bp.route("", methods=["GET"])
 def handle_books():
     books_response = []
@@ -31,7 +47,8 @@ def handle_books():
 
 @books_bp.route("/<book_id>", methods=["GET"])
 def handle_book(book_id):
-    book_id = int(book_id)
+    validate_book(book_id)
+
     for book in books:
         if book.id == book_id:
             return {
@@ -40,8 +57,6 @@ def handle_book(book_id):
                 "description": book.description,
             }
     
-    return {"message": f"book {book_id} not found"}, 404
-
 @hello_world_bp.route("/hello-world", methods=["GET"])
 def say_hello_world():
     return "Hello, World!"
