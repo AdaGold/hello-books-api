@@ -32,8 +32,14 @@ def create_book():
 
 @books_bp.route("", methods=["GET"])
 def read_all_books():
+    
+    title_query = request.args.get("title")
+    if title_query:
+        books = Book.query.filter_by(title=title_query)
+    else:
+        books = Book.query.all()
+
     books_response = []
-    books = Book.query.all()
     for book in books:
         books_response.append(
             {
