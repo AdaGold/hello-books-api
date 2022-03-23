@@ -6,6 +6,19 @@ from flask import Blueprint, jsonify, abort, make_response, request
 
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
+def validate_book(book_id):
+    try:
+        book_id = int(book_id)
+    except:
+        abort(make_response({"message":f"book {book_id} invalid"}, 400))
+
+    book = Book.query.get(book_id)
+
+    if not book:
+        abort(make_response({"message":f"book {book_id} not found"}, 404))
+
+    return book
+
 @books_bp.route("", methods=["POST"])
 def create_book():
     request_body = request.get_json()
@@ -31,33 +44,13 @@ def read_all_books():
         )
     return jsonify(books_response)
 
-# def validate_book(book_id):
-#     try:
-#         book_id = int(book_id)
-#     except:
-#         abort(make_response({"message":f"book {book_id} invalid"}, 400))
-
-#     found = False
-#     for book in books:
-#         if book.id == book_id:
-#             found = True
-
-#     if found is False:
-#         abort(make_response({"message":f"book {book_id} not found"}, 404))
-        
-
-
-
-# @books_bp.route("/<book_id>", methods=["GET"])
-# def handle_book(book_id):
-#     validate_book(book_id)
-
-#     for book in books:
-#         if book.id == book_id:
-#             return {
-#                 "id": book.id,
-#                 "title": book.title,
-#                 "description": book.description,
-#             }
+@books_bp.route("/<book_id>", methods=["GET"])
+def read_one_book(book_id):
+    book = validate_book(book_id)
+    return {
+            "id": book.id,
+            "title": book.title,
+            "description": book.description
+        }
 
 
