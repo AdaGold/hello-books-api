@@ -14,7 +14,6 @@ books = [
     Book(3, "Fictional Book Title", "A fantasy novel set in an imaginary world.")
 ]
 
-hello_world_bp = Blueprint("hello_world_bp", __name__)
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
 # def validate_book(book_id):
