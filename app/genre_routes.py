@@ -58,3 +58,15 @@ def create_book(genre_id):
     db.session.add(new_book)
     db.session.commit()
     return make_response(jsonify(f"Book {new_book.title} by {new_book.author.name} successfully created"), 201)
+
+@genres_bp.route("/<genre_id>/books", methods=["GET"])
+def read_all_books(genre_id):
+    
+    genre = validate_genre(genre_id)
+
+    books_response = []
+    for book in genre.books:
+        books_response.append(
+            book.to_dict()
+        )
+    return jsonify(books_response)
