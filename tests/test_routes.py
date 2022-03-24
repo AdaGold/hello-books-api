@@ -26,7 +26,7 @@ def test_create_one_book(client):
         "title": "New Book",
         "description": "The Best!"
     })
-    response_body = response.get_data(as_text=True)
+    response_body = response.get_json()
 
     # Assert
     assert response.status_code == 201
