@@ -24,6 +24,7 @@ def create_app(test_config=None):
     # Import models here
     from app.models.book import Book
     from app.models.author import Author
+    from app.models.genre import Genre
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -34,5 +35,8 @@ def create_app(test_config=None):
 
     from .author_routes import authors_bp
     app.register_blueprint(authors_bp)
+
+    from .genre_routes import genres_bp
+    app.register_blueprint(genres_bp)
 
     return app
