@@ -21,16 +21,11 @@ def validate_book(book_id):
     except:
         abort(make_response({"message":f"book {book_id} invalid"}, 400))
 
-    found = False
     for book in books:
         if book.id == book_id:
-            found = True
+            return book_id
 
-    if found is False:
-        abort(make_response({"message":f"book {book_id} not found"}, 404))
-
-    return book_id
-        
+    abort(make_response({"message":f"book {book_id} not found"}, 404))
 
 @books_bp.route("", methods=["GET"])
 def handle_books():
