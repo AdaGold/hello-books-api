@@ -16,19 +16,17 @@ from flask import Blueprint, jsonify, abort, make_response
 
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
-# def validate_book(book_id):
-#     try:
-#         book_id = int(book_id)
-#     except:
-#         abort(make_response({"message":f"book {book_id} invalid"}, 400))
-
-#     found = False
-#     for book in books:
-#         if book.id == book_id:
-#             found = True
-
-#     if found is False:
-#         abort(make_response({"message":f"book {book_id} not found"}, 404))
+#def validate_book(book_id):
+#    try:
+#        book_id = int(book_id)
+#    except:
+#        abort(make_response({"message":f"book {book_id} invalid"}, 400))
+#
+#    for book in books:
+#        if book.id == book_id:
+#            return book_id
+#
+#    abort(make_response({"message":f"book {book_id} not found"}, 404))
         
 
 # @books_bp.route("", methods=["GET"])
