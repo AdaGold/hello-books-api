@@ -31,23 +31,18 @@ def read_all_books():
         )
     return jsonify(books_response)
 
-# def validate_book(book_id):
-#     try:
-#         book_id = int(book_id)
-#     except:
-#         abort(make_response({"message":f"book {book_id} invalid"}, 400))
-
-#     found = False
-#     for book in books:
-#         if book.id == book_id:
-#             found = True
-
-#     if found is False:
-#         abort(make_response({"message":f"book {book_id} not found"}, 404))
+#def validate_book(book_id):
+#    try:
+#        book_id = int(book_id)
+#    except:
+#        abort(make_response({"message":f"book {book_id} invalid"}, 400))
+#
+#    for book in books:
+#        if book.id == book_id:
+#            return book_id
+#
+#    abort(make_response({"message":f"book {book_id} not found"}, 404))
         
-
-
-
 # @books_bp.route("/<book_id>", methods=["GET"])
 # def handle_book(book_id):
 #     validate_book(book_id)
