@@ -2,22 +2,10 @@ from app import db
 from app.models.author import Author
 from app.models.book import Book
 from app.models.genre import Genre
+from app.book_routes import validate_model
 from flask import Blueprint, jsonify, abort, make_response, request
 
 genres_bp = Blueprint("genres_bp", __name__, url_prefix="/genres")
-
-def validate_genre(genre_id):
-    try:
-        genre_id = int(genre_id)
-    except:
-        abort(make_response({"message":f"genre {genre_id} invalid"}, 400))
-
-    genre = Genre.query.get(genre_id)
-
-    if not genre:
-        abort(make_response({"message":f"genre {genre_id} not found"}, 404))
-
-    return genre
 
 @genres_bp.route("", methods=["POST"])
 def create_genre():
@@ -46,7 +34,7 @@ def read_all_genres():
 @genres_bp.route("/<genre_id>/books", methods=["POST"])
 def create_book(genre_id):
 
-    genre = validate_genre(genre_id)
+    genre = validate_model(Genre, genre_id)
 
     request_body = request.get_json()
     new_book = Book(
@@ -62,7 +50,7 @@ def create_book(genre_id):
 @genres_bp.route("/<genre_id>/books", methods=["GET"])
 def read_all_books(genre_id):
     
-    genre = validate_genre(genre_id)
+    genre = validate_model(Genre, genre_id)
 
     books_response = []
     for book in genre.books:
