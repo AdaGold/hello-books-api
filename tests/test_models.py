@@ -1,4 +1,5 @@
 from app.models.book import Book
+from app.models.author import Author
 import pytest
 
 def test_to_dict_no_missing_data():
