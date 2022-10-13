@@ -1,22 +1,10 @@
 from app import db
 from app.models.author import Author
 from app.models.book import Book
+from app.book_routes import validate_model
 from flask import Blueprint, jsonify, abort, make_response, request
 
 authors_bp = Blueprint("authors_bp", __name__, url_prefix="/authors")
-
-def validate_author(author_id):
-    try:
-        author_id = int(author_id)
-    except:
-        abort(make_response({"message":f"author {author_id} invalid"}, 400))
-
-    author = Author.query.get(author_id)
-
-    if not author:
-        abort(make_response({"message":f"author {author_id} not found"}, 404))
-
-    return author
 
 @authors_bp.route("", methods=["POST"])
 def create_author():
@@ -45,7 +33,7 @@ def read_all_authors():
 @authors_bp.route("/<author_id>/books", methods=["POST"])
 def create_book(author_id):
 
-    author = validate_author(author_id)
+    author = validate_model(Author, author_id)
 
     request_body = request.get_json()
     new_book = Book(
@@ -60,7 +48,7 @@ def create_book(author_id):
 @authors_bp.route("/<author_id>/books", methods=["GET"])
 def read_books(author_id):
 
-    author = validate_author(author_id)
+    author = validate_model(Author, author_id)
 
     books_response = []
     for book in author.books:
