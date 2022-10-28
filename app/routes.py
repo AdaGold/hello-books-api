@@ -26,11 +26,10 @@ def handle_books():
 @books_bp.route("/<book_id>", methods = ["GET"])
 def handle_book(book_id):
     book = validate_book(book_id)
-    return{
+    return jsonify({
         "id" : book.id, 
         "title" : book.title, 
-        "description" : book.description
-    }
+        "description" : book.description})
 
 def validate_book(book_id):
     try:
