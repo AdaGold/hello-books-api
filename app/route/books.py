@@ -1,6 +1,7 @@
 
-from os import abort
 from flask import Blueprint, jsonify, abort, make_response
+from ..db import db
+from ..model.book import Book
 
 # class Book:
 #     def __init__(self, id, title, description):
@@ -14,7 +15,26 @@ from flask import Blueprint, jsonify, abort, make_response
 #     Book(3, "Fictional Book Title", "A fantasy novel set in an imaginary world.")
 # ]
 
-books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
+bp = Blueprint("books", __name__, url_prefix="/books")
+
+# You may see uses of Model.query to build queries.
+# This is an older interface for queries that is considered legacy
+# in SQLAlchemy. Prefer using db.session.execute(db.select(...)) instead.
+# db.select resource: https://docs.sqlalchemy.org/en/20/tutorial/data_select.html
+
+@bp.get("/")
+def index():
+    models = db.session.execute(db.select(Book).order_by(Book.id)).scalars()
+
+    return list(map(Book.to_dict, models))
+
+@bp.get("/<id>")
+def get(id):
+    model = db.session.execute(db.select(Book).filter_by(id=id)).scalar()
+    if not model:
+        abort(make_response(dict(detail=f"invalid id {id}"), 404))
+
+    return model.to_dict()
 
 #def validate_book(book_id):
 #    try:
