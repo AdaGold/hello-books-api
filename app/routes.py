@@ -16,7 +16,7 @@ books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
 @books_bp.route("", methods=["GET"])
 @books_bp.get("/")
-def handle_books():
+def get_all_books():
     books_response = []
     for book in books:
         books_response.append(
