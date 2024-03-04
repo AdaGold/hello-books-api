@@ -4,12 +4,12 @@ from flask import Blueprint
 hello_world_bp = Blueprint("hello_world_bp", __name__)
 
 
-@hello_world_bp.route("/hello-world", methods=["GET"])
+@hello_world_bp.get("/")
 def say_hello_world():
     return "Hello, World!"
 
 
-@hello_world_bp.route("/hello/JSON", methods=["GET"])
+@hello_world_bp.get("/hello/JSON")
 def say_hello_json():
     return {
         "name": "Ada Lovelace",
@@ -18,7 +18,7 @@ def say_hello_json():
     }
 
 
-@hello_world_bp.route("/broken-endpoint-with-broken-server-code")
+@hello_world_bp.get("/broken-endpoint-with-broken-server-code")
 def broken_endpoint():
     response_body = {
         "name": "Ada Lovelace",
