@@ -1,6 +1,7 @@
-from app import db
+from sqlalchemy.orm import Mapped, mapped_column
+from ..db import db
 
 class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String)
-    description = db.Column(db.String)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    title: Mapped[str]
+    description: Mapped[str]
