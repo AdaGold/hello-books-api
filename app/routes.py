@@ -1,11 +1,5 @@
 from flask import Blueprint, jsonify, abort, make_response
 
-class Book:
-    def __init__(self, id, title, description):
-        self.id = id
-        self.title = title
-        self.description = description
-
 books = [
     Book(1, "Fictional Book", "A fantasy novel set in an imaginary world."),
     Book(2, "Wheel of Time", "A fantasy novel set in an imaginary world."),
@@ -50,3 +44,4 @@ def validate_book(book_id):
 
     response = {"message": f"book {book_id} not found"}
     abort(make_response(response, 404))
+
