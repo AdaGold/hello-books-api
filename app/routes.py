@@ -40,27 +40,28 @@ def get_all_books():
         )
     return jsonify(books_response)
 
-# @books_bp.get("/<book_id>")
-# def get_one_book(book_id):
-#     book = validate_book(book_id)
+@books_bp.get("/<book_id>")
+def get_one_book(book_id):
+    book = validate_book(book_id)
 
-#     return {
-#         "id": book.id,
-#         "title": book.title,
-#         "description": book.description,
-#     }
+    return {
+        "id": book.id,
+        "title": book.title,
+        "description": book.description,
+    }
 
-# def validate_book(book_id):
-#     try:
-#         book_id = int(book_id)
-#     except:
-#         response = {"message": f"book {book_id} invalid"}
-#         abort(make_response(response , 400))
+def validate_book(book_id):
+    try:
+        book_id = int(book_id)
+    except:
+        response = {"message": f"book {book_id} invalid"}
+        abort(make_response(response , 400))
 
-#     for book in books:
-#         if book.id == book_id:
-#             return book
+    query = db.select(Book).where(Book.id == book_id)
+    book = db.session.scalar(query)
+    if book:
+        return book
 
-#     response = {"message": f"book {book_id} not found"}
-#     abort(make_response(response, 404))
+    response = {"message": f"book {book_id} not found"}
+    abort(make_response(response, 404))
 
