@@ -50,6 +50,21 @@ def get_one_book(book_id):
         "description": book.description,
     }
 
+@books_bp.put("/<book_id>")
+def update_book(book_id):
+    book = validate_book(book_id)
+    request_body = request.get_json()
+
+    book.title = request_body.get("title")
+    book.description = request_body.get("description")
+    db.session.commit()
+
+    return {
+        "id": book.id,
+        "title": book.title,
+        "description": book.description,
+    }
+
 def validate_book(book_id):
     try:
         book_id = int(book_id)
