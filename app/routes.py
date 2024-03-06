@@ -59,11 +59,7 @@ def update_book(book_id):
     book.description = request_body.get("description")
     db.session.commit()
 
-    return {
-        "id": book.id,
-        "title": book.title,
-        "description": book.description,
-    }
+    return {"message": f"Book #{book.id} successfully updated"}
 
 def validate_book(book_id):
     try:
