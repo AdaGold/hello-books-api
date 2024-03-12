@@ -67,7 +67,7 @@ def delete_book(book_id):
     db.session.delete(book)
     db.session.commit()
 
-    return {"message": f"Book #{book.id} successfully deleted"}
+    return Response(status=204)
 
 def validate_book(book_id):
     try:
