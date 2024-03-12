@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, make_response, request
+from flask import Blueprint, jsonify, abort, make_response, request, Response
 from app.models.book import Book
 from sqlalchemy import select
 from .db import db
@@ -59,7 +59,7 @@ def update_book(book_id):
     book.description = request_body.get("description")
     db.session.commit()
 
-    return {"message": f"Book #{book.id} successfully updated"}
+    return Response(status=204)
 
 def validate_book(book_id):
     try:
