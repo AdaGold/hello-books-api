@@ -14,7 +14,7 @@ from flask import Blueprint, jsonify, abort, make_response
 
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
-# @books_bp.get("/")
+# @books_bp.get("")
 # def get_all_books():
 #     books_response = []
 #     for book in books:
