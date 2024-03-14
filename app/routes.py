@@ -50,4 +50,3 @@ books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
 #     response = {"message": f"book {book_id} not found"}
 #     abort(make_response(response, 404))
-
