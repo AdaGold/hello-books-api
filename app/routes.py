@@ -26,3 +26,14 @@ def get_all_books():
             }
         )
     return books_response
+
+@books_bp.get("/<book_id>")
+def get_one_book(book_id):
+    book_id = int(book_id)
+    for book in books:
+        if book.id == book_id:
+            return {
+                "id": book.id,
+                "title": book.title,
+                "description": book.description,
+            }
