@@ -47,23 +47,3 @@ def two_saved_books(app):
     # db.session.add(ocean_book)
     # db.session.add(mountain_book)
     db.session.commit()
-
-
-@pytest.fixture
-def one_saved_author(app):
-    author = Author(name="New Author 1")
-    db.session.add(author)
-    db.session.commit()
-
-
-@pytest.fixture
-def author_with_two_books(app, one_saved_author):    
-    desert_book = Book(title="Desert Book",
-                       description="Sands all around",
-                       author_id=1)
-    plains_book = Book(title="Plains Book",
-                       description="Grasslands for miles",
-                       author_id=1)
-
-    db.session.add_all([desert_book, plains_book])
-    db.session.commit()
