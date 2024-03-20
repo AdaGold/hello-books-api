@@ -68,14 +68,6 @@ def delete_book(book_id):
 
     return Response(status=204, mimetype="application/json")
 
-@books_bp.delete("/<book_id>")
-def delete_book(book_id):
-    book = validate_book(book_id)
-    db.session.delete(book)
-    db.session.commit()
-
-    return Response(status=204)
-
 def validate_book(book_id):
     try:
         book_id = int(book_id)
@@ -85,7 +77,7 @@ def validate_book(book_id):
 
     query = db.select(Book).where(Book.id == book_id)
     book = db.session.scalar(query)
-
+    
     if not book:
         response = {"message": f"book {book_id} not found"}
         abort(make_response(response, 404))
