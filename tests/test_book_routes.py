@@ -113,7 +113,7 @@ def test_create_one_book_no_title(client):
 def test_create_one_book_no_description(client):
     # Arrange
     test_data = {"title": "New Book"}
-
+    
     # Act
     response = client.post("/books", json=test_data)
     response_body = response.get_json()
