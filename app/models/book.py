@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
+from typing import List
 from ..db import db
 
 class Book(db.Model):
@@ -8,6 +9,7 @@ class Book(db.Model):
     description: Mapped[str]
     author_id: Mapped[int] = mapped_column(ForeignKey("author.id"), nullable=True)
     author: Mapped["Author"] = relationship(back_populates="books")
+    genres: Mapped[List["Genre"]] = relationship(secondary="book_genre", back_populates="books")
 
     def to_dict(self):
         book_as_dict = {}
