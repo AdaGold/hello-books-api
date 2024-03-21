@@ -4,6 +4,7 @@ from app.db import db
 from flask.signals import request_finished
 from app.models.book import Book
 from app.models.author import Author
+from app.models.genre import Genre
 
 
 @pytest.fixture
@@ -59,4 +60,26 @@ def author_with_two_books(app, one_saved_author):
                        author_id=1)
 
     db.session.add_all([desert_book, plains_book])
+    db.session.commit()
+
+
+@pytest.fixture
+def one_saved_genre(app):
+    genre = Genre(name="New Genre 1")
+    db.session.add(genre)
+    db.session.commit()
+
+    return genre
+
+
+@pytest.fixture
+def genre_with_two_books(app, one_saved_genre):   
+    sky_book = Book(title="Sky Book",
+                       description="Floating in the clouds",
+                       genres=[one_saved_genre])
+    tundra_book = Book(title="Tundra Book",
+                       description="Like plains but colder",
+                       genres=[one_saved_genre])
+
+    db.session.add_all([sky_book, tundra_book])
     db.session.commit()
