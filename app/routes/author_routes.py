@@ -1,6 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, jsonify, request
 from app.models.author import Author
-from .model_utilities import create_model, get_models_with_filters
+from app.models.book import Book
+from .model_utilities import create_model, get_models_with_filters, validate_model
 
 bp = Blueprint("authors_bp", __name__, url_prefix="/authors")
 
@@ -13,3 +14,17 @@ def create_author():
 def get_all_authors():
     filters = request.args
     return get_models_with_filters(Author, filters)
+
+@bp.post("/<author_id>/books")
+def create_book_with_author(author_id):
+    author = validate_model(Author, author_id)
+
+    request_body = request.get_json()
+    request_body["author_id"] = author.id
+    return create_model(Book, request_body)
+
+@bp.get("/<author_id>/books")
+def get_books_by_author(author_id):
+    author = validate_model(Author, author_id)
+    response = [book.to_dict() for book in author.books]
+    return jsonify(response)
