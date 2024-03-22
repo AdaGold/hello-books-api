@@ -1,6 +1,3 @@
-from app.routes.model_utilities import validate_model
-from app.models.book import Book
-
 def test_get_all_books_with_no_records(client):
     # Act
     response = client.get("/books")
