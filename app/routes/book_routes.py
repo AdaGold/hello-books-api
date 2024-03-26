@@ -7,8 +7,8 @@ books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 @books_bp.post("")
 def create_book():
     request_body = request.get_json()
-    title = request_body.get("title")
-    description = request_body.get("description")
+    title = request_body["title"]
+    description = request_body["description"]
 
     new_book = Book(title=title, description=description)
     db.session.add(new_book)
