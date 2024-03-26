@@ -66,7 +66,7 @@ def delete_book(book_id):
     db.session.delete(book)
     db.session.commit()
 
-    Response(status=204, mimetype="application/json")
+    return Response(status=204, mimetype="application/json")
 
 def validate_book(book_id):
     try:
