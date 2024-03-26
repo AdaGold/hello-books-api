@@ -58,7 +58,7 @@ def update_book(book_id):
     book.description = request_body["description"]
     db.session.commit()
 
-    return Response(status=204)
+    Response(status=204, mimetype="application/json") # 204 No Content
 
 def validate_book(book_id):
     try:
