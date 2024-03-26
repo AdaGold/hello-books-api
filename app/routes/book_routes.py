@@ -21,18 +21,23 @@ def create_book():
     }
     return make_response(response, 201)
 
-# @books_bp.get("")
-# def get_all_books():
-#     books_response = []
-#     for book in books:
-#         books_response.append(
-#             {
-#                 "id": book.id,
-#                 "title": book.title,
-#                 "description": book.description
-#             }
-#         )
-#     return books_response
+@books_bp.get("")
+def get_all_books():
+    query = db.select(Book).order_by(Book.id)
+    books = db.session.scalars(query)
+    # We could also write the line above as:
+    # books = db.session.execute(query).scalars()
+
+    books_response = []
+    for book in books:
+        books_response.append(
+            {
+                "id": book.id,
+                "title": book.title,
+                "description": book.description
+            }
+        )
+    return books_response
 
 # @books_bp.get("/<book_id>")
 # def get_one_book(book_id):
