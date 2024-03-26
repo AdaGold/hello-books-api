@@ -41,7 +41,9 @@ def get_all_books():
         # we can use ilike instead of like
         query = query.where(Book.title.ilike(f"%{title_param}%"))
 
-    # If we have other query parameters, we can continue adding to the query
+    # If we have other query parameters, we can continue adding to the query. 
+    # As we did above, we must reassign the `query`` variable to capture the new clause we are adding. 
+    # If we don't reassign `query``, we are calling the `where` function but are not saving the resulting filter
     description_param = request.args.get("description")
     if description_param:
         # In case there are books with similar titles, we can also filter by description
