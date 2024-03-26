@@ -23,6 +23,7 @@ def create_book():
 
 @books_bp.get("")
 def get_all_books():
+    # create a basic select query without any filtering
     query = db.select(Book)
 
     # If we have a `title` query parameter, we can add on to the query object
@@ -37,7 +38,7 @@ def get_all_books():
         # query = query.where(Book.title.like(f"%{title_param}%"))
 
         # If we want to allow searching case-insensitively, 
-        # we could use ilike instead of like
+        # we can use ilike instead of like
         query = query.where(Book.title.ilike(f"%{title_param}%"))
 
     # If we have other query parameters, we can continue adding to the query
