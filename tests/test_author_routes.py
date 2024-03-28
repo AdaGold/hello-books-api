@@ -146,4 +146,4 @@ def test_get_books_by_author_with_no_books(client, two_saved_books, one_saved_au
     # Assert
     assert response.status_code == 200
     assert len(response_body) == 0
-    assert response_body == []    
+    assert response_body == []
