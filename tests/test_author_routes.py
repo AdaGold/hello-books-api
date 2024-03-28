@@ -63,7 +63,6 @@ def test_get_all_authors_no_saved_author(client):
 
     # Assert
     assert response.status_code == 200
-    assert len(response_body) == 0
     assert response_body == []    
 
 def test_create_book_with_author(client, one_saved_author):
