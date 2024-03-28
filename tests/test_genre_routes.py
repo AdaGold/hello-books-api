@@ -42,3 +42,25 @@ def test_create_one_genre_with_extra_keys(client):
         "id": 1,
         "name": "New Genre"
     }
+
+def test_get_all_genres_one_saved_genre(client, one_saved_genre):
+    # Act
+    response = client.get("/genres")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 200
+    assert len(response_body) == 1
+    assert response_body[0] == {
+        "id": 1,
+        "name": "New Genre 1",
+    }
+
+def test_get_all_genres_no_saved_genres(client):
+    # Act
+    response = client.get("/genres")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 200
+    assert response_body == []

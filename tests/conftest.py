@@ -4,6 +4,7 @@ from app.db import db
 from flask.signals import request_finished
 from app.models.book import Book
 from app.models.author import Author
+from app.models.genre import Genre
 from dotenv import load_dotenv
 import os
 
@@ -67,3 +68,12 @@ def author_with_two_books(app, one_saved_author):
 
     db.session.add_all([desert_book, plains_book])
     db.session.commit()
+
+
+@pytest.fixture
+def one_saved_genre(app):
+    genre = Genre(name="New Genre 1")
+    db.session.add(genre)
+    db.session.commit()
+
+    return genre
