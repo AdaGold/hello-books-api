@@ -19,7 +19,7 @@ def create_book():
     db.session.add(new_book)
     db.session.commit()
 
-return make_response(new_book.to_dict(), 201)
+    return make_response(new_book.to_dict(), 201)
 
 @bp.get("")
 def get_all_books():
@@ -53,10 +53,10 @@ def get_all_books():
     # We could also write the line above as:
     # books = db.session.execute(query).scalars()
 
-books_response = []
+    books_response = []
     for book in books:
         books_response.append(book.to_dict())
-return books_response
+    return books_response
 
 @bp.get("/<book_id>")
 def get_one_book(book_id):
