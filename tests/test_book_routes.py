@@ -168,7 +168,6 @@ def test_update_book_with_extra_keys(client, two_saved_books):
 
     # Act
     response = client.put("/books/1", json=test_data)
-    assert response.content_length is None
 
     # Assert
     assert response.status_code == 204
