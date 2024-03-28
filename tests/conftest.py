@@ -75,5 +75,3 @@ def one_saved_genre(app):
     genre = Genre(name="New Genre 1")
     db.session.add(genre)
     db.session.commit()
-
-    return genre
