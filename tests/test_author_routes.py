@@ -42,3 +42,25 @@ def test_create_one_author_with_extra_keys(client):
         "id": 1,
         "name": "New Author"
     }
+
+def test_get_all_authors_one_saved_author(client, one_saved_author):
+    # Act
+    response = client.get("/authors")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 200
+    assert len(response_body) == 1
+    assert response_body[0] == {
+        "id": 1,
+        "name": "New Author 1",
+    }
+
+def test_get_all_authors_no_saved_author(client):
+    # Act
+    response = client.get("/authors")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 200
+    assert response_body == []
