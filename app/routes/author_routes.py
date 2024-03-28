@@ -42,6 +42,9 @@ def create_book_with_author(author_id):
     request_body = request.get_json()
     request_body["author_id"] = author.id
     new_book = Book.from_dict(request_body)
+
+    db.session.add(new_book)
+    db.session.commit()
     
     db.session.add(new_book)
     db.session.commit()
