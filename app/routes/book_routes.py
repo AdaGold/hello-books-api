@@ -7,10 +7,14 @@ books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 @books_bp.post("")
 def create_book():
     request_body = request.get_json()
-    title = request_body["title"]
-    description = request_body["description"]
 
-    new_book = Book(title=title, description=description)
+    try:
+        new_book = Book.from_dict(request_body)
+        
+    except KeyError as error:
+        response = {"message": f"Invalid request: missing {error.args[0]}"}
+        abort(make_response(response, 400))
+    
     db.session.add(new_book)
     db.session.commit()
 
