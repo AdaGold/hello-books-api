@@ -12,21 +12,8 @@ def create_author():
 
 @bp.get("")
 def get_all_authors():
-<<<<<<< HEAD
-    query = db.select(Author)
-    
-    name_param = request.args.get("name")
-    if name_param:
-        query = query.where(Author.name.ilike(f"%{name_param}%"))
-    
-    authors = db.session.scalars(query.order_by(Author.id))
-    authors_response = [author.to_dict() for author in authors]
-
-return authors_response
-=======
     filters = request.args
     return get_models_with_filters(Author, filters)
->>>>>>> 97a2318 (Refactor model creation and fetching and filtering models to the model_utilities file)
 
 @bp.post("/<author_id>/books")
 def create_book_with_author(author_id):
