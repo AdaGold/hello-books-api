@@ -25,11 +25,11 @@ def create_author():
 @bp.get("")
 def get_all_authors():
     query = db.select(Author)
-    
+
     name_param = request.args.get("name")
     if name_param:
         query = query.where(Author.name.ilike(f"%{name_param}%"))
-    
+
     authors = db.session.scalars(query.order_by(Author.id))
     authors_response = [author.to_dict() for author in authors]
 
