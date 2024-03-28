@@ -2,11 +2,16 @@ import pytest
 from app import create_app
 from app.db import db
 from flask.signals import request_finished
+import os
 
 
 @pytest.fixture
 def app():
-    app = create_app({"TESTING": True})
+    test_config = {
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": os.environ.get('SQLALCHEMY_TEST_DATABASE_URI')
+    }
+    app = create_app(test_config)
 
     @request_finished.connect_via(app)
     def expire_session(sender, response, **extra):
