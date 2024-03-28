@@ -75,3 +75,18 @@ def one_saved_genre(app):
     genre = Genre(name="New Genre 1")
     db.session.add(genre)
     db.session.commit()
+
+    return genre
+
+
+@pytest.fixture
+def genre_with_two_books(app, one_saved_genre):   
+    sky_book = Book(title="Sky Book",
+                       description="Floating in the clouds",
+                       genres=[one_saved_genre])
+    tundra_book = Book(title="Tundra Book",
+                       description="Like plains but colder",
+                       genres=[one_saved_genre])
+
+    db.session.add_all([sky_book, tundra_book])
+    db.session.commit()

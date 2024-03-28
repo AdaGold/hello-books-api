@@ -63,7 +63,7 @@ def test_get_all_genres_no_saved_genres(client):
 
     # Assert
     assert response.status_code == 200
-    assert response_body == []    }
+    assert response_body == []   
 
 def test_create_book_with_genre(client, one_saved_genre):
     # Arrange
