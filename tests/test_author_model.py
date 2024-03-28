@@ -53,7 +53,7 @@ def test_from_dict_with_no_name():
 
     # Act & Assert
     with pytest.raises(KeyError, match = 'name'):
-        new_book = Author.from_dict(author_data)
+        new_author = Author.from_dict(author_data)
 
 def test_from_dict_with_extra_keys():
     # Arrange
