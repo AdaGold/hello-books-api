@@ -155,11 +155,10 @@ def test_update_book(client, two_saved_books):
 
     # Act
     response = client.put("/books/1", json=test_data)
-    response_body = response.get_json()
 
     # Assert
     assert response.status_code == 204
-    assert response_body is None
+    assert response.content_length is None
 
 def test_update_book_with_extra_keys(client, two_saved_books):
     # Arrange
@@ -172,11 +171,11 @@ def test_update_book_with_extra_keys(client, two_saved_books):
 
     # Act
     response = client.put("/books/1", json=test_data)
-    response_body = response.get_json()
+    assert response.content_length is None
 
     # Assert
     assert response.status_code == 204
-    assert response_body is None
+    assert response.content_length is None
 
 def test_update_book_missing_record(client, two_saved_books):
     # Arrange
@@ -211,11 +210,10 @@ def test_update_book_invalid_id(client, two_saved_books):
 def test_delete_book(client, two_saved_books):
     # Act
     response = client.delete("/books/1")
-    response_body = response.get_json()
 
     # Assert
     assert response.status_code == 204
-    assert response_body is None
+    assert response.content_length is None
 
 def test_delete_book_missing_record(client, two_saved_books):
     # Act
