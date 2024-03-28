@@ -24,8 +24,8 @@ def update_book(book_id):
     book = validate_model(Book, book_id)
     request_body = request.get_json()
 
-    book.title = request_body["title"]
-    book.description = request_body["description"]
+    book.title = request_body.get("title")
+    book.description = request_body.get("description")
     db.session.commit()
 
     return Response(status=204, mimetype="application/json") # 204 No Content
