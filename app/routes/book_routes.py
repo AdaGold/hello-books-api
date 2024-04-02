@@ -1,6 +1,6 @@
 from flask import Blueprint, abort, make_response, request, Response
 from app.models.book import Book
-from .model_utilities import validate_model
+from .route_utilities import validate_model
 from ..db import db
 
 bp = Blueprint("books_bp", __name__, url_prefix="/books")
