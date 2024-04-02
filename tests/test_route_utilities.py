@@ -29,5 +29,5 @@ def test_validate_model_invalid_id(two_saved_books):
     with pytest.raises(HTTPException) as error:
         result_book = validate_model(Book, "cat")
 
-        response = error.value.response
-        assert response.status == "400 BAD REQUEST"
+    response = error.value.response
+    assert response.status == "400 BAD REQUEST"
