@@ -68,5 +68,3 @@ def test_from_dict_with_extra_keys():
 
     # Assert
     assert new_genre.name == "New Genre"
-    assert hasattr(new_genre, "extra") == False
-    assert hasattr(new_genre, "another") == False

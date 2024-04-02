@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.models.genre import Genre
-from .model_utilities import create_model, get_models_with_filters
+from .route_utilities import create_model, get_models_with_filters
 
 bp = Blueprint("genres_bp", __name__, url_prefix="/genres")
 
