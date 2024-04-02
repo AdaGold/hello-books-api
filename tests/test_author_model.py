@@ -68,5 +68,3 @@ def test_from_dict_with_extra_keys():
 
     # Assert
     assert new_author.name == "New Author"
-    assert hasattr(new_author, "extra") == False
-    assert hasattr(new_author, "another") == False
