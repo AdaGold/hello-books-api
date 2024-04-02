@@ -11,11 +11,11 @@ def create_book():
 
     try:
         new_book = Book.from_dict(request_body)
-        
+
     except KeyError as error:
         response = {"message": f"Invalid request: missing {error.args[0]}"}
         abort(make_response(response, 400))
-    
+
     db.session.add(new_book)
     db.session.commit()
 
