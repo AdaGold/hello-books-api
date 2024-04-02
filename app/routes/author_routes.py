@@ -46,9 +46,6 @@ def create_book_with_author(author_id):
     db.session.add(new_book)
     db.session.commit()
     
-    db.session.add(new_book)
-    db.session.commit()
-    
     return make_response(new_book.to_dict(), 201)
 
 @bp.get("/<author_id>/books")
