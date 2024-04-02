@@ -20,9 +20,7 @@ def create_book_with_author(author_id):
     
     request_body = request.get_json()
     request_body["author_id"] = author.id
-    new_book = Book.from_dict(request_body)
-    
-    return make_response(new_book.to_dict(), 201)
+    return create_model(Book, request_body)
 
 @bp.get("/<author_id>/books")
 def get_books_by_author(author_id):
