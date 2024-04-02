@@ -1,5 +1,3 @@
-import pytest
-
 def test_get_all_books_with_no_records(client):
     # Act
     response = client.get("/books")
