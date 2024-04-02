@@ -2,8 +2,10 @@ import pytest
 from app import create_app
 from app.db import db
 from flask.signals import request_finished
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
 @pytest.fixture
 def app():
