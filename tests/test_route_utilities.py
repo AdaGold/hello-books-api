@@ -1,6 +1,7 @@
 from app.routes.route_utilities import validate_model, create_model, get_models_with_filters
 from werkzeug.exceptions import HTTPException
 from app.models.book import Book
+from app.models.author import Author
 import pytest
 
 def test_validate_model(two_saved_books):
