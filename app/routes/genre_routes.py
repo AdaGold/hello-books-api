@@ -11,5 +11,4 @@ def create_genre():
 
 @bp.get("")
 def get_all_genres():
-    filters = request.args
-    return get_models_with_filters(Genre, filters)
+    return get_models_with_filters(Genre, request.args)
