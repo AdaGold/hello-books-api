@@ -12,8 +12,7 @@ def create_book():
 
 @bp.get("")
 def get_all_books():
-    filters = request.args
-    return get_models_with_filters(Book, filters)
+    return get_models_with_filters(Book, request.args)
 
 @bp.get("/<book_id>")
 def get_one_book(book_id):

@@ -12,8 +12,7 @@ def create_author():
 
 @bp.get("")
 def get_all_authors():
-    filters = request.args
-    return get_models_with_filters(Author, filters)
+    return get_models_with_filters(Author, request.args)
 
 @bp.post("/<author_id>/books")
 def create_book_with_author(author_id):
