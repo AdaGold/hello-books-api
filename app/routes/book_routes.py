@@ -19,7 +19,7 @@ def create_book():
         "title": new_book.title,
         "description": new_book.description,
     }
-    return make_response(response, 201)
+    return response, 201
 
 # @books_bp.get("")
 # def get_all_books():
