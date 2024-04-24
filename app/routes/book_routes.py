@@ -19,7 +19,7 @@ def create_book():
     db.session.add(new_book)
     db.session.commit()
 
-    return make_response(new_book.to_dict(), 201)
+    return new_book.to_dict(), 201
 
 @bp.get("")
 def get_all_books():
