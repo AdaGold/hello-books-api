@@ -18,7 +18,12 @@ def create_book():
     db.session.add(new_book)
     db.session.commit()
 
-    return make_response(new_book.to_dict(), 201)
+    response = {
+        "id": new_book.id,
+        "title": new_book.title,
+        "description": new_book.description,
+    }
+    return response, 201
 
 @books_bp.get("")
 def get_all_books():
