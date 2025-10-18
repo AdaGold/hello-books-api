@@ -16,5 +16,7 @@ def get_all_books():
         )
     return books_response
 
+@books_bp.get("/")
+
 
 
